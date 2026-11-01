@@ -35,8 +35,8 @@ export default function BookCard({ book, showEdit, showDelete, onEdit, onDelete 
   const catColor = categoryColors[book.category] || 'bg-gray-100 text-gray-700'
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-[#D4CDB8] shadow-sm hover:shadow-md transition-shadow flex flex-col h-full">
-      <div className="relative aspect-[3/4] overflow-hidden bg-[#F5F0E8]">
+    <div className="bg-white rounded-xl overflow-hidden border border-[#D4CDB8] shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#F5F0E8]">
         {book.image ? (
           <Image
             src={book.image}
@@ -54,7 +54,7 @@ export default function BookCard({ book, showEdit, showDelete, onEdit, onDelete 
           {book.category}
         </span>
       </div>
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-3 sm:p-4 flex flex-col flex-1">
         <h3 className="font-bold text-[#1A1A1A] leading-tight line-clamp-2 mb-1">{book.title}</h3>
         <p className="text-sm text-[#5A5A5A] mb-3">{book.author}</p>
         <div className="mt-auto flex flex-col gap-2">
