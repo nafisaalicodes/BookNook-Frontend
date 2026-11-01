@@ -20,7 +20,7 @@ const lato = Lato({
 
 export const metadata: Metadata = {
   title: 'BookNook – A Small Online Library',
-  description: 'A little corner for every reader. Discover books, share stories, and make room for your next favorite read.',
+  description: 'BookNook - A small Online Library',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
