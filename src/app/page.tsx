@@ -134,67 +134,147 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#EDE7D8] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-3xl bg-[#F5F0E8] border border-[#D4CDB8] overflow-hidden flex flex-col lg:flex-row">
-            <div className="flex-1 p-8 sm:p-12 flex flex-col justify-center">
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1A1A] mb-4">
-                A little space for book lovers.
-              </h2>
-              <p className="text-[#5A5A5A] leading-relaxed mb-6">
-                Reading is more than turning pages. It&apos;s discovering new perspectives, finding comfort in familiar words, and sharing stories that stay with us.
-              </p>
-              <div className="flex flex-wrap gap-6 mb-8">
-                {[
-                  { icon: '💡', text: 'Discover new\nperspectives.' },
-                  { icon: '❤️', text: 'Make room\nfor new stories.' },
-                  { icon: '👥', text: 'Share the joy\nof reading.' },
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col items-center text-center">
-                    <span className="text-2xl mb-1">{item.icon}</span>
-                    <p className="text-xs text-[#5A5A5A] whitespace-pre-line">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-              <Link
-                href="/books"
-                className="inline-flex items-center gap-2 bg-[#2D5016] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#3D6B20] transition-colors w-fit"
-              >
-                Find Your Next Read →
-              </Link>
-            </div>
-            <div className="relative lg:w-80 xl:w-96 min-h-[250px] lg:min-h-0">
+      <section className="bg-[#EDE7D8] py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">   
+        <div className="flex flex-col overflow-hidden rounded-[2rem] border border-[#D4CDB8] bg-[#F5F0E8] shadow-[0_30px_60px_-45px_rgba(26,46,13,0.6)] lg:flex-row">
+            <div className="relative flex-1 p-7 sm:p-10 lg:p-14">
               <Image
-                src="/reader_by_window_photo.png"
-                alt="A reader by the window"
-                fill
-                className="object-cover"
+                src="/bookshelf_botanical_illustration.png"
+                alt=""
+                width={190}
+                height={280}
+                className="pointer-events-none absolute bottom-4 right-4 hidden opacity-[0.14] mix-blend-multiply lg:block"
               />
+
+              <div className="relative">
+                <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-[#C8860A]">
+                  — Pull up a chair —
+                </p>
+
+                <h2 className="font-serif text-[2rem] font-bold leading-[1.12] tracking-tight text-[#1A1A1A] sm:text-4xl lg:text-[2.75rem]">
+                  A little space for <span className="italic text-[#2D5016]">book lovers</span>.
+                </h2>
+
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-[#5A5A5A] sm:text-[17px]">
+                  Reading is more than turning pages. It&apos;s discovering new perspectives, finding comfort in familiar words, and sharing stories that stay with us.
+                </p>
+
+                <ul className="mt-8 grid gap-3 sm:grid-cols-3">
+                  {[
+                    { icon: '💡', text: 'Discover new perspectives.' },
+                    { icon: '❤️', text: 'Make room for new stories.' },
+                    { icon: '👥', text: 'Share the joy of reading.' },
+                  ].map((item, i) => (
+                    <li
+                      key={i}
+                      className="group/point flex items-center gap-3 rounded-2xl border border-[#D4CDB8] bg-white/60 px-4 py-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[rgba(45,80,22,0.45)] hover:bg-white hover:shadow-[0_16px_30px_-24px_rgba(26,46,13,0.9)]"
+                    >
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#D4CDB8] bg-[#EDE7D8] text-lg leading-none transition-colors duration-300 group-hover/point:border-[rgba(200,134,10,0.65)]">
+                        {item.icon}
+                      </span>
+                      <span className="text-[13px] font-semibold leading-snug text-[#5A5A5A]">
+                        {item.text}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/books"
+                  className="group/cta mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#2D5016] px-7 py-3.5 text-[15px] font-bold text-white shadow-[0_16px_30px_-18px_rgba(45,80,22,0.9)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#3D6B20] hover:shadow-[0_20px_38px_-18px_rgba(45,80,22,0.9)] active:translate-y-0"
+                >
+                  Find Your Next Read
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover/cta:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
+
+<div className="relative min-h-[260px] w-full flex-shrink-0 overflow-hidden sm:min-h-[340px] lg:min-h-0 lg:w-[42%] lg:self-stretch xl:w-[44%]">
+  <Image
+    src="/Reader.png"
+    alt="A reader by the window"
+    fill
+    sizes="(min-width: 1280px) 44vw, (min-width: 1024px) 42vw, 100vw"
+    className="object-cover object-center"
+  />
+
+  <div
+    aria-hidden="true"
+    className="pointer-events-none absolute inset-0"
+    style={{
+      background:
+        'linear-gradient(to top, rgba(26,46,13,0.32), rgba(26,46,13,0) 45%)',
+    }}
+  />
+
+  <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-px bg-[#D4CDB8] lg:block" />
+</div>
+
+</div>
+</div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl p-8 border border-[#D4CDB8] flex items-start gap-4 relative overflow-hidden">
-            <div className="shrink-0 text-3xl">🔖</div>
-            <div>
-              <h3 className="font-bold text-[#1A1A1A] text-lg mb-2">Staff Note</h3>
-              <blockquote className="font-serif italic text-[#5A5A5A] text-lg leading-relaxed mb-4">
-                &ldquo;Books are a uniquely portable magic.&rdquo;
-              </blockquote>
-              <p className="text-xs text-[#5A5A5A]">— Stephen King</p>
-              <Link href="/books" className="inline-block mt-4 text-sm font-semibold text-[#2D5016] hover:underline">
-                Read More →
-              </Link>
+        <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
+          <article className="group relative flex flex-col justify-center overflow-hidden rounded-3xl border border-[#D4CDB8] bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(45,80,22,0.45)] hover:shadow-[0_30px_55px_-40px_rgba(26,46,13,0.75)] sm:p-9">
+            <div className="relative z-10 flex items-start gap-4">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-[#D4CDB8] bg-[#F5F0E8] text-xl leading-none transition-colors duration-300 group-hover:border-[rgba(200,134,10,0.65)]">
+                🔖
+              </span>
+              <div className="min-w-0">
+                <h3 className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#1A1A1A]">
+                  Staff Note
+                </h3>
+                <blockquote className="font-serif text-xl italic leading-snug text-[#1A2E0D] sm:text-2xl">
+                  &ldquo;Books are a uniquely portable magic.&rdquo;
+                </blockquote>
+                <p className="mt-3 text-xs font-semibold tracking-wide text-[#5A5A5A]">
+                  — Stephen King
+                </p>
+                <Link
+                  href="/books"
+                  className="group/link mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-[#2D5016] transition-colors duration-300 hover:text-[#C8860A]"
+                >
+                  Read More
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover/link:translate-x-1">
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
-            <div className="absolute right-4 bottom-2 opacity-20">
-              <Image src="/open_book_botanical_illustration.png" alt="" width={100} height={80} className="object-contain" />
+
+            <Image
+              src="/open_book_botanical_illustration.png"
+              alt=""
+              width={132}
+              height={106}
+              className="pointer-events-none absolute -bottom-3 -right-3 opacity-[0.2] mix-blend-multiply transition-opacity duration-300 group-hover:opacity-35"
+            />
+          </article>
+
+          <div className="relative flex flex-col justify-center overflow-hidden rounded-3xl border border-[#2D5016] bg-[#1A2E0D] p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_55px_-40px_rgba(26,46,13,0.9)] sm:p-9">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full"
+              style={{ background: 'radial-gradient(circle, rgba(200,134,10,0.35) 0%, rgba(200,134,10,0) 70%)' }}
+            />
+            <div className="relative">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C8860A]">
+                — Newsletter —
+              </p>
+              <h3 className="mt-3 font-serif text-2xl font-bold text-white sm:text-3xl">
+                Stay in the loop.
+              </h3>
+              <p className="mt-2 max-w-sm text-sm leading-relaxed text-[#A8B8A0]">
+                New arrivals and quiet recommendations, right in your inbox.
+              </p>
+              <div className="mt-6">
+                <Newsletterform />
+              </div>
             </div>
           </div>
-
-          <Newsletterform />
         </div>
       </section>
     </div>

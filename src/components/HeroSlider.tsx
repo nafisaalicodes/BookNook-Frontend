@@ -14,21 +14,21 @@ const slides = [
     title: 'Find a story that feels like home.',
     desc: 'Discover little known gems, timeless classics, and stories waiting to become your new favorites.',
     img: '/cozy_library_hero_photo.png',
-    quote: 'Your next\nchapter awaits.',
+   
   },
   {
     tag: 'EXPLORE THE COLLECTION',
     title: 'Every book is a new adventure.',
     desc: 'From science to fiction, history to kids — find the genre that speaks to your soul.',
     img: '/stack_of_books_photo.png',
-    quote: 'A world\nof stories.',
+    
   },
   {
     tag: 'BORROW & RETURN EASILY',
     title: 'Reading made simple and joyful.',
     desc: 'Borrow any book in seconds, read at your own pace, and return when you\'re done.',
     img: '/reader_by_window_photo.png',
-    quote: 'Read today,\nreturn tomorrow.',
+    
   },
 ]
 
@@ -77,11 +77,7 @@ export default function HeroSlider() {
                   </Link>
                 </div>
 
-                <div className="hidden lg:block shrink-0">
-                  <p className="font-serif text-3xl italic text-[#2D5016] text-right leading-tight whitespace-pre-line">
-                    {slide.quote}
-                  </p>
-                </div>
+                
               </div>
 
               <div className="pb-8" />

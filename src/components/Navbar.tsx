@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useState, useRef, useEffect } from 'react'
 import { useSession, signOut } from '@/lib/auth-client'
 import toast from 'react-hot-toast'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname  } from 'next/navigation'
 
 export default function Navbar() {
   const { data: session, isPending } = useSession()
@@ -13,6 +13,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -32,6 +33,19 @@ export default function Navbar() {
   }
 
   const user = session?.user
+  
+const handleNavClick = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  href: string
+) => {
+  if (href === '/add-book') {
+    e.preventDefault()
+    setMobileOpen(false)
+
+    router.push(`/add-book?reset=${crypto.randomUUID()}`)
+  }
+}
+
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -72,17 +86,18 @@ export default function Navbar() {
 
 
           
-          <div className="hidden md:flex items-center gap-6">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium text-[#1A1A1A] hover:text-[#2D5016] transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
+        <div className="hidden md:flex items-center gap-6">
+        {navLinks.map(link => (
+  <Link
+    key={link.href}
+    href={link.href}
+    onClick={(e) => handleNavClick(e, link.href)}
+    className="text-sm font-medium text-[#1A1A1A] hover:text-[#2D5016] transition-colors"
+  >
+    {link.label}
+  </Link>
+))}
+</div>
 
           
           <div className="flex items-center gap-3">
@@ -184,18 +199,21 @@ export default function Navbar() {
         </div>
 
        
-        {mobileOpen && (
-          <div className="md:hidden border-t border-[#D4CDB8] py-3 space-y-1">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block px-3 py-2 text-sm font-medium text-[#1A1A1A] hover:bg-[#F5F0E8] rounded-lg transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+         {mobileOpen && (
+  <div className="md:hidden border-t border-[#D4CDB8] py-3 space-y-1">
+    {navLinks.map(link => (
+  <Link
+    key={link.href}
+    href={link.href}
+    onClick={(e) => {
+      handleNavClick(e, link.href)
+      setMobileOpen(false)
+    }}
+    className="block px-3 py-2 text-sm font-medium text-[#1A1A1A] hover:bg-[#F5F0E8] rounded-lg transition-colors"
+  >
+    {link.label}
+  </Link>
+))}
             {!user && (
               <Link
                 href="/login"
