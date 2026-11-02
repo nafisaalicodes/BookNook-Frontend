@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+BookNook – A Small Online Library
 
-## Getting Started
+BookNook is an online library management platform designed to help users discover, explore, borrow, and manage books in one place. The application provides book browsing by category, personal book collection management, borrowing history, and a responsive user interface for a smooth experience across different devices.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js — React framework with App Router
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+React — Building interactive user interfaces
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+TypeScript — Type-safe application development
 
-## Learn More
+Tailwind CSS — Responsive and modern UI styling
 
-To learn more about Next.js, take a look at the following resources:
+Better Auth — Authentication and session management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Express.js — Backend API development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+MongoDB — Database integration
 
-## Deploy on Vercel
+JWT — Secure API authentication and authorization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Key Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Book Discovery & Browsing
+
+Explore a collection of books with detailed information.
+
+Browse books by categories such as Fiction, Science, History, Kids, and Others.
+
+View book details, including title, author, image, and description.
+
+User Authentication
+
+Register and sign in using email and password.
+
+Authenticate using Google with Better Auth.
+
+Access protected pages and features after signing in.
+
+Book Management
+
+Add new books with relevant details and images.
+
+Update existing book information.
+
+Delete books from your personal collection.
+
+Manage only the books added by the logged-in user.
+
+Book Borrowing System
+
+Borrow available books through a simple borrowing process.
+
+View borrowing dates and return dates.
+
+Manage borrowed books from the My Borrows section.
+
+Return borrowed books when finished.
+
+My Books
+
+View all books added by the logged-in user.
+
+Edit book information and manage personal book listings.
+
+Keep track of your own book collection.
+
+My Borrows
+
+View all borrowed books in one place.
+
+Track book titles, borrowing dates, and return dates.
+
+Return borrowed books easily.
+
+Responsive User Interface
+
+Enjoy a clean and user friendly design.
+
+Access the application across desktop, tablet, and mobile devices.
+
+Experience consistent layouts and smooth navigation.
