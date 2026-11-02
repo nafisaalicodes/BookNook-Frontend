@@ -1,5 +1,6 @@
 export const instant = false
 import type { Metadata } from 'next'
+import { Fragment } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import HeroSlider from '@/components/HeroSlider'
@@ -15,11 +16,11 @@ export const metadata: Metadata = {
 }
 
 const categories = [
-  { name: 'Fiction', emoji: '📖', desc: 'Worlds beyond your own.', img: '/category_fiction.png' },
-  { name: 'Science', emoji: '⚛️', desc: 'Curiosity, explained.', img: '/category_science.png' },
-  { name: 'History', emoji: '🏛️', desc: 'Stories that shaped us.', img: '/category_history.png' },
-  { name: 'Kids', emoji: '🧸', desc: 'Little readers, big imaginations.', img: '/category_kids.png' },
-  { name: 'Others', emoji: '📚', desc: 'Something unexpected.', img: '/category_others.png' },
+  { name: 'Fiction', emoji: '📖', desc: 'Worlds beyond your own.', img: '/fiction.png' },
+  { name: 'Science', emoji: '⚛️', desc: 'Curiosity, explained.', img: '/science.png' },
+  { name: 'History', emoji: '🏛️', desc: 'Stories that shaped us.', img: '/history.png' },
+  { name: 'Kids', emoji: '🧸', desc: 'Little readers, big imaginations.', img: '/kids.png' },
+  { name: 'Others', emoji: '📚', desc: 'Something unexpected.', img: '/others.png' },
 ]
 
 async function getNewArrivals() {
@@ -76,61 +77,136 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold tracking-widest text-[#C8860A] uppercase mb-2">
+      <section className="relative overflow-hidden bg-white py-16 sm:py-20">
+        <Image
+          src="/open_book_botanical_illustration.png"
+          alt=""
+          aria-hidden="true"
+          width={132}
+          height={106}
+          className="pointer-events-none absolute -left-12 bottom-8 hidden opacity-[0.12] mix-blend-multiply lg:block"
+        />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#C8860A] sm:tracking-[0.22em]">
               — FIND YOUR KIND OF STORY. —
             </p>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-[#1A1A1A] sm:text-4xl">
+              A shelf for every mood.
+            </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-[#5A5A5A]">
+              From faraway worlds to curious discoveries — explore collections curated
+              for every kind of reader.
+            </p>
+            <div aria-hidden="true" className="mt-6 flex items-center justify-center gap-3">
+              <span className="h-px w-12 bg-[#D4CDB8]" />
+              <span className="h-1.5 w-1.5 rotate-45 bg-[#C8860A]" />
+              <span className="h-px w-12 bg-[#D4CDB8]" />
+            </div>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-5">
             {categories.map(cat => (
               <Link
                 key={cat.name}
                 href={`/books?category=${cat.name}`}
-                className="group bg-[#F5F0E8] rounded-2xl p-6 text-center border border-[#D4CDB8] hover:border-[#2D5016] hover:shadow-md transition-all"
+                className="group relative flex flex-col items-center overflow-hidden rounded-3xl border border-[#D4CDB8] bg-[#F5F0E8] px-5 pb-6 pt-7 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(45,80,22,0.45)] hover:bg-white hover:shadow-[0_30px_55px_-40px_rgba(26,46,13,0.7)]"
               >
-                <div className="w-16 h-16 mx-auto mb-3 bg-white rounded-full flex items-center justify-center border border-[#D4CDB8] group-hover:border-[#2D5016] transition-colors overflow-hidden">
-                  {cat.img ? (
-                    <Image src={cat.img} alt={cat.name} width={48} height={48} className="object-contain" />
-                  ) : (
-                    <span className="text-2xl">{cat.emoji}</span>
-                  )}
-                </div>
-                <h3 className="font-bold text-[#1A1A1A] mb-1">{cat.name}</h3>
-                <p className="text-xs text-[#5A5A5A]">{cat.desc}</p>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-10 -top-12 h-32 w-32 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{ background: 'radial-gradient(circle, rgba(200,134,10,0.16) 0%, rgba(200,134,10,0) 70%)' }}
+                />
+
+                <div className="relative h-24 w-24 overflow-hidden rounded-full border border-[#D4CDB8] bg-white transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[rgba(200,134,10,0.65)] group-hover:shadow-[0_14px_26px_-18px_rgba(26,46,13,0.6)]">
+  {cat.img ? (
+    <Image
+      src={cat.img}
+      alt={cat.name}
+      fill
+      sizes="96px"
+      className="object-cover transition-transform duration-300 group-hover:scale-110"
+    />
+  ) : (
+    <span className="grid h-full w-full place-items-center text-2xl">{cat.emoji}</span>
+  )}
+</div>
+
+                <h3 className="relative mt-4 font-serif text-lg font-bold text-[#1A1A1A] transition-colors duration-300 group-hover:text-[#2D5016]">
+                  {cat.name}
+                </h3>
+                <p className="relative mt-1 text-xs leading-relaxed text-[#5A5A5A] sm:text-sm">
+                  {cat.desc}
+                </p>
+
+                <span className="relative mt-4 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-[#2D5016] transition-colors duration-300 group-hover:text-[#C8860A]">
+                  Explore
+                  <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-10">
-          <p className="text-xs font-semibold tracking-widest text-[#C8860A] uppercase">
-            — YOUR NEXT READ IS CLOSER THAN YOU THINK. —
-          </p>
-        </div>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0">
-          {[
-            { num: '01', icon: '🔍', title: 'Discover', desc: 'Explore a growing collection of books across different genres.' },
-            { num: '02', icon: '📗', title: 'Borrow', desc: 'Choose a book, confirm your borrow, and make it part of your reading journey.' },
-            { num: '03', icon: '🔄', title: 'Return & Repeat', desc: 'Return your book when you\'re done and discover another story.' },
-          ].map((step, i) => (
-            <div key={i} className="flex items-center">
-              <div className="flex flex-col items-center text-center max-w-xs px-4">
-                <div className="w-16 h-16 bg-[#EDE7D8] rounded-full flex items-center justify-center text-2xl mb-3 border-2 border-[#D4CDB8] relative">
-                  {step.icon}
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#2D5016] text-white rounded-full text-[10px] font-bold flex items-center justify-center">{step.num}</span>
-                </div>
-                <h3 className="font-bold text-[#1A1A1A] mb-1">{step.title}</h3>
-                <p className="text-sm text-[#5A5A5A]">{step.desc}</p>
-              </div>
-              {i < 2 && (
-                <div className="hidden sm:block text-[#D4CDB8] text-2xl px-2">→</div>
-              )}
+      <section className="py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#C8860A] sm:tracking-[0.22em]">
+              — YOUR NEXT READ IS CLOSER THAN YOU THINK. —
+            </p>
+            <h2 className="mt-3 font-serif text-3xl font-bold text-[#1A1A1A] sm:text-4xl">
+              Three steps to your next read.
+            </h2>
+            <p className="mt-3 text-[15px] leading-relaxed text-[#5A5A5A]">
+              Discover something new, borrow it in a click, and return it whenever
+              you&apos;re ready — then do it all again.
+            </p>
+            <div aria-hidden="true" className="mt-6 flex items-center justify-center gap-3">
+              <span className="h-px w-12 bg-[#D4CDB8]" />
+              <span className="h-1.5 w-1.5 rotate-45 bg-[#C8860A]" />
+              <span className="h-px w-12 bg-[#D4CDB8]" />
             </div>
-          ))}
+          </div>
+
+          <div className="flex flex-col items-center gap-5 md:flex-row md:items-stretch md:justify-center md:gap-4">
+            {[
+              { num: '01', icon: '🔍', title: 'Discover', desc: 'Explore a growing collection of books across different genres.' },
+              { num: '02', icon: '📗', title: 'Borrow', desc: 'Choose a book, confirm your borrow, and make it part of your reading journey.' },
+              { num: '03', icon: '🔄', title: 'Return & Repeat', desc: 'Return your book when you\'re done and discover another story.' },
+            ].map((step, i) => (
+              <Fragment key={step.num}>
+                <div className="group relative flex w-full max-w-sm flex-col items-center overflow-hidden rounded-3xl border border-[#D4CDB8] bg-white px-6 pb-7 pt-8 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-[rgba(45,80,22,0.45)] hover:shadow-[0_30px_55px_-40px_rgba(26,46,13,0.75)] md:w-auto md:max-w-[19rem] md:flex-1">
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 h-[3px] origin-center scale-x-0 bg-[#2D5016] transition-transform duration-300 group-hover:scale-x-100"
+                  />
+
+                  <div className="relative grid h-16 w-16 shrink-0 place-items-center rounded-full border-2 border-[#D4CDB8] bg-[#F5F0E8] text-2xl transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[rgba(200,134,10,0.65)]">
+                    {step.icon}
+                    <span className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-[#2D5016] text-[10px] font-bold text-white ring-2 ring-white">
+                      {step.num}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 font-serif text-xl font-bold text-[#1A1A1A] transition-colors duration-300 group-hover:text-[#2D5016]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#5A5A5A]">{step.desc}</p>
+                </div>
+
+                {i < 2 && (
+                  <div aria-hidden="true" className="hidden shrink-0 items-center gap-1.5 self-center md:flex">
+                    <span className="block w-8 border-t-2 border-dashed border-[#D4CDB8]" />
+                    <span className="text-base text-[#C8860A]">→</span>
+                  </div>
+                )}
+              </Fragment>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -193,7 +269,7 @@ export default async function HomePage() {
 
 <div className="relative min-h-[260px] w-full flex-shrink-0 overflow-hidden sm:min-h-[340px] lg:min-h-0 lg:w-[42%] lg:self-stretch xl:w-[44%]">
   <Image
-    src="/Reader.png"
+    src="/Reading_Book.png"
     alt="A reader by the window"
     fill
     sizes="(min-width: 1280px) 44vw, (min-width: 1024px) 42vw, 100vw"

@@ -1,144 +1,188 @@
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
-export async function getJwtToken(email: string): Promise<string> {
+export async function getJwtToken(): Promise<string> {
   const res = await fetch(`${API_URL}/jwt`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
+    credentials: 'include',
   })
-  if (!res.ok) throw new Error('Failed to get token')
-  const data = await res.json()
-  if (typeof window !== 'undefined') {
-    sessionStorage.setItem('booknook_token', data.token)
+
+  if (!res.ok) {
+    throw new Error('Authentication failed. Please login again.')
   }
+
+  const data = await res.json()
+
+  if (typeof data.token !== 'string') {
+    throw new Error('Invalid token received from server')
+  }
+
   return data.token
 }
 
-function getStoredToken(): string | null {
-  if (typeof window !== 'undefined') {
-    return sessionStorage.getItem('booknook_token')
+export async function authFetch(
+  endpoint: string,
+  options: RequestInit = {}
+): Promise<Response> {
+  const token = await getJwtToken()
+
+  const headers = new Headers(options.headers)
+
+  headers.set('Authorization', `Bearer ${token}`)
+
+  if (options.body && !headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json')
   }
-  return null
+
+  return fetch(`${API_URL}${endpoint}`, {
+    ...options,
+    headers,
+  })
 }
 
-function authHeaders(): HeadersInit {
-  const token = getStoredToken()
-  return token
-    ? { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
-    : { 'Content-Type': 'application/json' }
-}
-
-export async function fetchBooks(options?: { sort?: string; limit?: number }) {
+// Fetch all books
+export async function fetchBooks(options?: {
+  sort?: string
+  limit?: number
+}) {
   const params = new URLSearchParams()
+
   if (options?.sort) params.set('sort', options.sort)
   if (options?.limit) params.set('limit', String(options.limit))
-  const res = await fetch(`${API_URL}/books?${params}`, { cache: 'no-store' })
-  if (!res.ok) throw new Error('Failed to fetch books')
+
+  const res = await fetch(`${API_URL}/books?${params}`, {
+    cache: 'no-store',
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch books')
+  }
+
   return res.json()
 }
 
 export async function fetchBook(id: string) {
-  const res = await fetch(`${API_URL}/books/${id}`, { cache: 'no-store' })
-  if (!res.ok) throw new Error('Failed to fetch book')
+  const res = await fetch(`${API_URL}/books/${id}`, {
+    cache: 'no-store',
+  })
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch book')
+  }
+
   return res.json()
 }
 
 export async function addBook(data: Record<string, unknown>) {
   const res = await fetch(`${API_URL}/books`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data),
   })
+
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.error || 'Failed to add book')
   }
+
   return res.json()
 }
 
-export async function updateBook(id: string, data: Record<string, unknown>) {
+export async function updateBook(
+  id: string,
+  data: Record<string, unknown>
+) {
   const res = await fetch(`${API_URL}/books/${id}`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(data),
   })
+
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.error || 'Failed to update book')
   }
+
   return res.json()
 }
 
 export async function deleteBook(id: string) {
-  const res = await fetch(`${API_URL}/books/${id}`, { method: 'DELETE' })
+  const res = await fetch(`${API_URL}/books/${id}`, {
+    method: 'DELETE',
+  })
+
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.error || 'Failed to delete book')
   }
+
   return res.json()
 }
 
 export async function borrowBook(data: Record<string, unknown>) {
-  const res = await fetch(`${API_URL}/borrows`, {
+  const res = await authFetch('/borrows', {
     method: 'POST',
-    headers: authHeaders(),
     body: JSON.stringify(data),
   })
+
   if (!res.ok) {
     const err = await res.json()
-    throw new Error(err.message || err.error || 'Failed to borrow book')
+    throw new Error(
+      err.message || err.error || 'Failed to borrow book'
+    )
   }
+
   return res.json()
 }
 
 export async function fetchBorrows(email: string) {
-  const token = getStoredToken()
-  const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
-  const res = await fetch(`${API_URL}/borrows?email=${encodeURIComponent(email)}`, {
-    cache: 'no-store',
-    headers,
-  })
-  if (!res.ok) throw new Error('Failed to fetch borrows')
+  const res = await authFetch(
+    `/borrows?email=${encodeURIComponent(email)}`,
+    {
+      cache: 'no-store',
+    }
+  )
+
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(
+      err.message || err.error || 'Failed to fetch borrows'
+    )
+  }
+
   return res.json()
 }
 
 export async function returnBook(borrowId: string) {
-  const token = getStoredToken()
-  const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {}
-  const res = await fetch(`${API_URL}/borrows/${borrowId}`, {
+  const res = await authFetch(`/borrows/${borrowId}`, {
     method: 'DELETE',
-    headers,
   })
+
   if (!res.ok) {
     const err = await res.json()
-    throw new Error(err.message || err.error || 'Failed to return book')
+    throw new Error(
+      err.message || err.error || 'Failed to return book'
+    )
   }
+
   return res.json()
 }
 
-
-
 export async function fetchMyBooks(email: string) {
- 
-  let token = getStoredToken()
-
-  if (!token) {
-    token = await getJwtToken(email)
-  }
-
-  const headers: HeadersInit = {
-    Authorization: `Bearer ${token}`,
-  }
-
-  const url = `${API_URL}/my-books?email=${encodeURIComponent(email)}`
-
-  const res = await fetch(url, {
-    cache: 'no-store',
-    headers,
-  })
+  const res = await authFetch(
+    `/my-books?email=${encodeURIComponent(email)}`,
+    {
+      cache: 'no-store',
+    }
+  )
 
   if (!res.ok) {
     const errorText = await res.text()
+
     throw new Error(
       `Failed to fetch your books: ${res.status} ${errorText}`
     )
@@ -147,18 +191,31 @@ export async function fetchMyBooks(email: string) {
   return res.json()
 }
 
-
-
-export async function uploadImageToImgbb(file: File): Promise<string> {
+export async function uploadImageToImgbb(
+  file: File
+): Promise<string> {
   const apiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY
-  if (!apiKey) throw new Error('imgbb API key not configured')
+
+  if (!apiKey) {
+    throw new Error('imgbb API key not configured')
+  }
+
   const formData = new FormData()
   formData.append('image', file)
-  const res = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
-    method: 'POST',
-    body: formData,
-  })
-  if (!res.ok) throw new Error('Image upload failed')
+
+  const res = await fetch(
+    `https://api.imgbb.com/1/upload?key=${apiKey}`,
+    {
+      method: 'POST',
+      body: formData,
+    }
+  )
+
+  if (!res.ok) {
+    throw new Error('Image upload failed')
+  }
+
   const data = await res.json()
+
   return data.data.url
 }

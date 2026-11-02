@@ -154,7 +154,7 @@ export default function MyProfilePage() {
               disabled={isSigningOut}
               className="mt-6 rounded-full border border-white/50 px-6 py-2.5 font-semibold text-white transition hover:bg-white hover:text-[#2D5016] disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {isSigningOut ? 'Signing out...' : '↪ Sign Out'}
+              {isSigningOut ? 'log out...' : '↪ log Out'}
             </button>
           </div>
 
