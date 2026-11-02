@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="YOUR_FRONTEND_LIVE_URL">
+  <a href="https://booknook-frontend-nafisa-ali.vercel.app">
     <strong> Visit Live Website</strong>
   </a>
 </p>
