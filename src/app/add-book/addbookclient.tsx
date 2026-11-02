@@ -6,6 +6,7 @@ import { useSession } from '@/lib/auth-client'
 import { addBook, uploadImageToImgbb } from '@/lib/api'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const CATEGORIES = ['Fiction', 'Science', 'History', 'Kids', 'Others']
 
@@ -149,7 +150,7 @@ function AddBookForm() {
             <div className="flex items-start gap-4">
               <div className="w-24 h-32 bg-[#F5F0E8] rounded-xl border-2 border-dashed border-[#D4CDB8] overflow-hidden flex items-center justify-center shrink-0">
                 {imagePreview ? (
-                  <img
+                  <Image
                     src={imagePreview}
                     alt="Preview"
                     className="w-full h-full object-cover"

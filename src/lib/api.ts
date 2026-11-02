@@ -2,9 +2,10 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
 export async function getJwtToken(): Promise<string> {
-  const res = await fetch(`${API_URL}/jwt`, {
+  const res = await fetch('/api/jwt', {
     method: 'POST',
     credentials: 'include',
+    cache: 'no-store',
   })
 
   if (!res.ok) {
