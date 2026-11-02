@@ -1,84 +1,75 @@
-BookNook – A Small Online Library
+# BookNook — A Small Online Library
 
-BookNook is an online library management platform designed to help users discover, explore, borrow, and manage books in one place. The application provides book browsing by category, personal book collection management, borrowing history, and a responsive user interface for a smooth experience across different devices.
+<p align="center">
+  A modern online library platform to explore books, manage personal collections and keep track of borrowed books.
+</p>
+
+<p align="center">
+  <a href="YOUR_FRONTEND_LIVE_URL">
+    <strong> Visit Live Website</strong>
+  </a>
+</p>
 
 
-Technologies Used
+## About The Project
 
-Next.js — React framework with App Router
+BookNook is an online library management platform designed to make book discovery and management simple and convenient. Users can explore books across different categories, borrow available books, manage their personal collections, and track their borrowing history through an intuitive and responsive interface.
 
-React — Building interactive user interfaces
 
-TypeScript — Type-safe application development
+##  Technologies Used
 
-Tailwind CSS — Responsive and modern UI styling
+| Technology | Purpose |
+|:---|:---|
+| **Next.js** | React framework with App Router |
+| **React** | Building interactive user interfaces |
+| **TypeScript** | Type safe application development |
+| **Tailwind CSS** | Responsive and modern UI styling |
+| **Better Auth** | Authentication and session management |
+| **Express.js** | Backend API development |
+| **MongoDB** | Database integration |
+| **JWT** | Secure API authentication and authorization |
 
-Better Auth — Authentication and session management
 
-Express.js — Backend API development
+## Key Features
 
-MongoDB — Database integration
+###  1. Book Discovery & Browsing
+- Explore a collection of books with detailed information.
+- Browse books by Fiction, Science, History, Kids, and Others categories.
+- View book details, including title, author, image, and description.
 
-JWT — Secure API authentication and authorization
+###  2. User Authentication
+- Register and sign in using email and password.
+- Authenticate using Google with Better Auth.
+- Access protected pages and features after signing in.
 
-Key Features
+###  3. Book Management
+- Add new books with relevant details and images.
+- Update existing book information.
+- Delete books from your personal collection.
+- Manage books added by the logged-in user.
 
-Book Discovery & Browsing
+###  4. Book Borrowing System
+- Borrow available books through a simple borrowing process.
+- View borrowing dates and return dates.
+- Manage borrowed books from the My Borrows section.
+- Return borrowed books when finished.
 
-Explore a collection of books with detailed information.
+###  5. My Books
+- View all books added by the logged-in user.
+- Edit book information and manage personal book listings.
+- Keep track of your own book collection.
 
-Browse books by categories such as Fiction, Science, History, Kids, and Others.
+###  6. My Borrows
+- View all borrowed books in one place.
+- Track book titles, borrowing dates, and return dates.
+- Return borrowed books easily.
 
-View book details, including title, author, image, and description.
+###  7. Responsive User Interface
+- Enjoy a clean and user-friendly design.
+- Access the application across desktop, tablet, and mobile devices.
+- Experience consistent layouts and smooth navigation.
 
-User Authentication
 
-Register and sign in using email and password.
-
-Authenticate using Google with Better Auth.
-
-Access protected pages and features after signing in.
-
-Book Management
-
-Add new books with relevant details and images.
-
-Update existing book information.
-
-Delete books from your personal collection.
-
-Manage only the books added by the logged-in user.
-
-Book Borrowing System
-
-Borrow available books through a simple borrowing process.
-
-View borrowing dates and return dates.
-
-Manage borrowed books from the My Borrows section.
-
-Return borrowed books when finished.
-
-My Books
-
-View all books added by the logged-in user.
-
-Edit book information and manage personal book listings.
-
-Keep track of your own book collection.
-
-My Borrows
-
-View all borrowed books in one place.
-
-Track book titles, borrowing dates, and return dates.
-
-Return borrowed books easily.
-
-Responsive User Interface
-
-Enjoy a clean and user friendly design.
-
-Access the application across desktop, tablet, and mobile devices.
-
-Experience consistent layouts and smooth navigation.
+<p align="center">
+  Made with ❤️ for Book Lovers
+</p>
