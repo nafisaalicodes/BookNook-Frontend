@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from '@/lib/auth-client'
 import toast from 'react-hot-toast'
@@ -46,7 +47,7 @@ export default function LoginForm() {
       if (result.error) {
         toast.error(result.error.message || 'Invalid email or password')
       } else {
-        toast.success('Welcome back! 📚')
+        toast.success('Welcome back!')
         router.push(redirectTo)
       }
     } catch {
@@ -75,9 +76,16 @@ export default function LoginForm() {
       <div className="bg-white w-full max-w-md rounded-3xl shadow-lg border border-[#D4CDB8] p-8 sm:p-10">
      
         <div className="text-center mb-8">
-          <div className="w-14 h-14 bg-[#2D5016] rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">📖</span>
-          </div>
+          <div className="w-14 h-14 bg-[#2D5016] rounded-2xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+  <Image
+    src="/logo.png"
+    alt="BookNook Logo"
+    width={56}
+    height={56}
+    className="object-contain"
+    priority
+  />
+</div>
 
           <h1 className="font-serif text-3xl font-bold text-[#1A1A1A]">
             Welcome Back
